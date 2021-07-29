@@ -1,6 +1,6 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Value;
+namespace BoiteBeet\NovaFlexibleContent\Value;
 
 interface ResolverInterface
 {

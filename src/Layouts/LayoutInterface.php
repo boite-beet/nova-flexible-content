@@ -1,8 +1,8 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Layouts;
+namespace BoiteBeet\NovaFlexibleContent\Layouts;
 
-use Whitecube\NovaFlexibleContent\Http\ScopedRequest;
+use BoiteBeet\NovaFlexibleContent\Http\ScopedRequest;
 
 interface LayoutInterface
 {

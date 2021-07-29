@@ -1,17 +1,17 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent;
+namespace BoiteBeet\NovaFlexibleContent;
 
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Whitecube\NovaFlexibleContent\Http\ScopedRequest;
-use Whitecube\NovaFlexibleContent\Value\Resolver;
-use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
-use Whitecube\NovaFlexibleContent\Layouts\Preset;
-use Whitecube\NovaFlexibleContent\Layouts\Layout;
-use Whitecube\NovaFlexibleContent\Layouts\LayoutInterface;
-use Whitecube\NovaFlexibleContent\Layouts\Collection as LayoutsCollection;
+use BoiteBeet\NovaFlexibleContent\Http\ScopedRequest;
+use BoiteBeet\NovaFlexibleContent\Value\Resolver;
+use BoiteBeet\NovaFlexibleContent\Value\ResolverInterface;
+use BoiteBeet\NovaFlexibleContent\Layouts\Preset;
+use BoiteBeet\NovaFlexibleContent\Layouts\Layout;
+use BoiteBeet\NovaFlexibleContent\Layouts\LayoutInterface;
+use BoiteBeet\NovaFlexibleContent\Layouts\Collection as LayoutsCollection;
 
 class Flexible extends Field
 {
@@ -25,7 +25,7 @@ class Flexible extends Field
     /**
      * The available layouts collection
      *
-     * @var Whitecube\NovaFlexibleContent\Layouts\Collection
+     * @var BoiteBeet\NovaFlexibleContent\Layouts\Collection
      */
     protected $layouts;
 
@@ -39,7 +39,7 @@ class Flexible extends Field
     /**
      * The field's value setter & getter
      *
-     * @var Whitecube\NovaFlexibleContent\Value\ResolverInterface
+     * @var BoiteBeet\NovaFlexibleContent\Value\ResolverInterface
      */
     protected $resolver;
 
@@ -244,7 +244,7 @@ class Flexible extends Field
     /**
      * Push a layout instance into the layouts collection
      *
-     * @param Whitecube\NovaFlexibleContent\Layouts\LayoutInterface $layout
+     * @param BoiteBeet\NovaFlexibleContent\Layouts\LayoutInterface $layout
      * @return void
      */
     protected function registerLayout(LayoutInterface $layout)
@@ -466,7 +466,7 @@ class Flexible extends Field
      * Find an existing group based on its key
      *
      * @param  string $key
-     * @return \Whitecube\NovaFlexibleContent\Layouts\Layout
+     * @return \BoiteBeet\NovaFlexibleContent\Layouts\Layout
      */
     protected function findGroup($key)
     {
@@ -480,7 +480,7 @@ class Flexible extends Field
      *
      * @param  string $layout
      * @param  string $key
-     * @return \Whitecube\NovaFlexibleContent\Layouts\Layout
+     * @return \BoiteBeet\NovaFlexibleContent\Layouts\Layout
      */
     protected function newGroup($layout, $key)
     {
@@ -618,7 +618,7 @@ class Flexible extends Field
      * Return a previously registered validation key
      *
      * @param  string $key
-     * @return null|\Whitecube\NovaFlexibleContent\Http\FlexibleAttribute
+     * @return null|\BoiteBeet\NovaFlexibleContent\Http\FlexibleAttribute
      */
     public static function getValidationKey($key)
     {

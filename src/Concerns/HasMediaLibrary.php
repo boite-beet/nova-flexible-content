@@ -1,12 +1,12 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Concerns;
+namespace BoiteBeet\NovaFlexibleContent\Concerns;
 
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\MediaRepository;
-use Whitecube\NovaFlexibleContent\FileAdder\FileAdder;
-use Whitecube\NovaFlexibleContent\FileAdder\FileAdderFactory;
-use Whitecube\NovaFlexibleContent\Flexible;
+use BoiteBeet\NovaFlexibleContent\FileAdder\FileAdder;
+use BoiteBeet\NovaFlexibleContent\FileAdder\FileAdderFactory;
+use BoiteBeet\NovaFlexibleContent\Flexible;
 use Spatie\MediaLibrary\Downloaders\DefaultDownloader;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\InvalidUrl;
@@ -15,7 +15,7 @@ use Laravel\Nova\Nova;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Media;
-use Whitecube\NovaFlexibleContent\Http\ScopedRequest;
+use BoiteBeet\NovaFlexibleContent\Http\ScopedRequest;
 
 trait HasMediaLibrary {
 
@@ -60,7 +60,7 @@ trait HasMediaLibrary {
      * based on the overridden addMedia method in this class.
      *
      * @param string $url
-     * 
+     *
      * @param string|array<string> ...$allowedMimeTypes
      */
     public function addMediaFromUrl($url, ...$allowedMimeTypes): \Spatie\MediaLibrary\MediaCollections\FileAdder
@@ -94,7 +94,7 @@ trait HasMediaLibrary {
             ->usingName(pathinfo($filename, PATHINFO_FILENAME))
             ->usingFileName($filename);
     }
-    
+
     /**
      * Get media collection by its collectionName.
      *
@@ -108,7 +108,7 @@ trait HasMediaLibrary {
         return app(MediaRepository::class)
             ->getCollection($this->getMediaModel(), $collectionName . $this->getSuffix(), $filters);
     }
-  
+
     /**
      * Get the media collection name suffix.
      *
@@ -118,7 +118,7 @@ trait HasMediaLibrary {
     {
         return '_' . $this->inUseKey();
     }
-    
+
     /**
      * Resolve fields for display using given attributes.
      *
@@ -143,14 +143,14 @@ trait HasMediaLibrary {
      * Should remove all related medias except if shouldDeletePreservingMedia returns true
      *
      * @param  Flexible $flexible
-     * @param  Whitecube\NovaFlexibleContent\Layout $layout
+     * @param  BoiteBeet\NovaFlexibleContent\Layout $layout
      *
      * @return mixed
      */
     protected function removeCallback(Flexible $flexible, $layout)
     {
       if ($this->shouldDeletePreservingMedia()) return;
-  
+
       $collectionsToClear = config('media-library.media_model')::select('collection_name')
         ->where('collection_name', 'like', '%' . $this->getSuffix())
         ->distinct()
@@ -158,7 +158,7 @@ trait HasMediaLibrary {
         ->map(function ($value) {
           return str_replace($this->getSuffix(), '', $value);
         });
-  
+
       foreach ($collectionsToClear as $collection) {
         $layout->clearMediaCollection($collection);
       }
