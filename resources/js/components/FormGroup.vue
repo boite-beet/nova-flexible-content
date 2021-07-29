@@ -37,6 +37,7 @@
                         <icon type="arrow-down" view-box="0 0 8 4.8" width="10" height="10" />
                     </button>
                     <button
+                        v-if="group.canDelete"
                         dusk="delete-group"
                         type="button"
                         class="group-control btn border-t border-r border-40 w-8 h-8 block"
