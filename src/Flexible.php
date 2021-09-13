@@ -241,6 +241,16 @@ class Flexible extends Field
         return $this;
     }
 
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function getLayouts()
+    {
+        return $this->layouts;
+    }
+
     /**
      * Push a layout instance into the layouts collection
      *
