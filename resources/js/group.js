@@ -6,6 +6,7 @@ export default class Group {
         this.fields = fields;
         this.key = key || this.getTemporaryUniqueKey(field.attribute);
         this.collapsed = collapsed;
+        this.withoutLabel = field.withoutLabel;
         this.readonly = field.readonly;
         this.canDelete = field.canDelete;
 

@@ -193,14 +193,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['group', 'index', 'last', 'resource', 'resourceName', 'resourceId'],
   computed: {
     componentStyle: function componentStyle() {
-      return this.last ? [] : ['border-b border-50 pb-4 mb-4'];
+      var flex = this.group.withoutLabel ? 'flex flex-row' : 'flex flex-col';
+      return this.last ? [flex] : ["".concat(flex, " border-b border-50 pb-4 mb-4")];
     },
     titleStyle: function titleStyle() {
-      return ['pb-4', 'border-b', 'border-40'];
+      return this.group.withoutLabel ? ['pt-4', 'pr-4'] : ['pb-4', 'border-b', 'border-40'];
     }
   }
 });
@@ -950,6 +953,7 @@ var Group = /*#__PURE__*/function () {
     this.fields = fields;
     this.key = key || this.getTemporaryUniqueKey(field.attribute);
     this.collapsed = collapsed;
+    this.withoutLabel = field.withoutLabel;
     this.readonly = field.readonly;
     this.canDelete = field.canDelete;
     this.renameFields();
@@ -32559,29 +32563,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { class: _vm.componentStyle },
-    [
-      _vm.group.title
-        ? _c("div", { class: _vm.titleStyle }, [
-            _c(
-              "span",
-              { staticClass: "block float-left border-r border-40 pr-4 mr-4" },
-              [
-                _c("span", { staticClass: "text-60 text-xs" }, [_vm._v("#")]),
-                _c("span", { staticClass: "text-80" }, [
-                  _vm._v(_vm._s(_vm.index + 1))
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "font-bold" }, [
-              _vm._v(_vm._s(_vm.group.title))
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
+  return _c("div", { class: _vm.componentStyle }, [
+    _vm.group.title
+      ? _c("div", { class: _vm.titleStyle }, [
+          _c(
+            "span",
+            {
+              staticClass: "block float-left border-40 pr-4 mr-4",
+              class: { "border-r": !_vm.group.withoutLabel }
+            },
+            [
+              _c("span", { staticClass: "text-60 text-xs" }, [_vm._v("#")]),
+              _c("span", { staticClass: "text-80" }, [
+                _vm._v(_vm._s(_vm.index + 1))
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          !_vm.group.withoutLabel
+            ? _c("span", { staticClass: "font-bold" }, [
+                _vm._v(_vm._s(_vm.group.title))
+              ])
+            : _vm._e()
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "w-full" },
       _vm._l(_vm.group.fields, function(item, index) {
         return _c("detail-" + item.component, {
           key: index,
@@ -32596,10 +32605,10 @@ var render = function() {
             field: item
           }
         })
-      })
-    ],
-    2
-  )
+      }),
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

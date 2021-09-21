@@ -1,22 +1,24 @@
 <template>
     <div :class="componentStyle">
         <div :class="titleStyle" v-if="group.title">
-            <span class="block float-left border-r border-40 pr-4 mr-4"><!--
+            <span class="block float-left border-40 pr-4 mr-4" :class="{'border-r': !group.withoutLabel}"><!--
              --><span class="text-60 text-xs">#</span><!--
              --><span class="text-80">{{index+1}}</span>
             </span>
-            <span class="font-bold">{{group.title}}</span>
+            <span v-if="!group.withoutLabel" class="font-bold">{{group.title}}</span>
         </div>
-        <component
-            v-for="(item, index) in group.fields"
-            :key="index"
-            :is="'detail-' + item.component"
-            :resource-name="resourceName"
-            :resource-id="resourceId"
-            :resource="resource"
-            :field="item"
-            :class="{ 'remove-bottom-border': index == group.fields.length - 1 }"
-        />
+        <div class="w-full">
+            <component
+                v-for="(item, index) in group.fields"
+                :key="index"
+                :is="'detail-' + item.component"
+                :resource-name="resourceName"
+                :resource-id="resourceId"
+                :resource="resource"
+                :field="item"
+                :class="{ 'remove-bottom-border': index == group.fields.length - 1 }"
+            />
+        </div>
     </div>
 </template>
 
@@ -26,10 +28,11 @@ export default {
 
     computed: {
         componentStyle() {
-            return this.last ? [] : ['border-b border-50 pb-4 mb-4'];
+            let flex = this.group.withoutLabel ? 'flex flex-row' : 'flex flex-col'
+            return this.last ? [flex] : [`${flex} border-b border-50 pb-4 mb-4`];
         },
         titleStyle() {
-            return ['pb-4', 'border-b', 'border-40'];
+            return this.group.withoutLabel ? ['pt-4', 'pr-4'] : ['pb-4', 'border-b', 'border-40'];
         }
     }
 }
