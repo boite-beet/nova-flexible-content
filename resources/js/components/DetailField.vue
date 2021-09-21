@@ -1,5 +1,17 @@
 <template>
-    <panel-item :field="field">
+    <div v-if="field.fullWidth && field.withoutLabel">
+        <div v-for="(group, index) in groups">
+            <detail-nova-flexible-content-group
+                :index="index"
+                :last="(index === groups.length - 1)"
+                :group="group"
+                :resource="resource"
+                :resourceName="resourceName"
+                :resourceId="resourceId"
+            />
+        </div>
+    </div>
+    <panel-item v-else :field="field">
         <template slot="value">
             <div v-for="(group, index) in groups">
                 <detail-nova-flexible-content-group

@@ -159,6 +159,11 @@ class Flexible extends Field
         return $this->withMeta(['canDelete' => $value]);
     }
 
+    public function withoutLabel($value = true)
+    {
+        return $this->withMeta(['withoutLabel' => $value]);
+    }
+
     /**
      * Set the field's resolver
      *
