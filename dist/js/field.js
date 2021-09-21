@@ -550,16 +550,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.BehavesAsPanel],
   props: ['errors', 'group', 'index', 'field'],
   data: function data() {
     return {
+      ready: false,
       removeMessage: false,
       collapsed: this.group.collapsed,
       readonly: this.group.readonly
     };
+  },
+  mounted: function mounted() {
+    this.ready = true;
+  },
+  watch: {
+    index: function index() {
+      var _this = this;
+
+      this.ready = false;
+      this.$nextTick(function () {
+        _this.ready = true;
+      });
+    }
   },
   computed: {
     titleStyle: function titleStyle() {
@@ -32992,21 +33007,23 @@ var render = function() {
           "div",
           { class: _vm.containerStyle },
           _vm._l(_vm.group.fields, function(item, index) {
-            return _c("form-" + item.component, {
-              key: index,
-              tag: "component",
-              class: {
-                "remove-bottom-border": index == _vm.group.fields.length - 1
-              },
-              attrs: {
-                "resource-name": _vm.resourceName,
-                "resource-id": _vm.resourceId,
-                resource: _vm.resource,
-                field: item,
-                errors: _vm.errors,
-                "show-help-text": item.helpText != null
-              }
-            })
+            return _vm.ready
+              ? _c("form-" + item.component, {
+                  key: index,
+                  tag: "component",
+                  class: {
+                    "remove-bottom-border": index == _vm.group.fields.length - 1
+                  },
+                  attrs: {
+                    "resource-name": _vm.resourceName,
+                    "resource-id": _vm.resourceId,
+                    resource: _vm.resource,
+                    field: item,
+                    errors: _vm.errors,
+                    "show-help-text": item.helpText != null
+                  }
+                })
+              : _vm._e()
           }),
           1
         )

@@ -71,6 +71,7 @@
             <div :class="containerStyle">
                 <component
                     v-for="(item, index) in group.fields"
+                    v-if="ready"
                     :key="index"
                     :is="'form-' + item.component"
                     :resource-name="resourceName"
@@ -96,10 +97,24 @@ export default {
 
     data() {
         return {
+            ready: false,
             removeMessage: false,
             collapsed: this.group.collapsed,
             readonly: this.group.readonly,
         };
+    },
+
+    mounted() {
+        this.ready = true;
+    },
+
+    watch: {
+        index() {
+            this.ready = false;
+            this.$nextTick(() => {
+                this.ready = true;
+            });
+        }
     },
 
     computed: {
