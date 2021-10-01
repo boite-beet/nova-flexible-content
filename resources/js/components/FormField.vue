@@ -76,7 +76,7 @@ export default {
 
         limitCounter() {
             if (this.field.limit === null) {
-                return null;
+                return 1;
             }
 
             return this.field.limit - Object.keys(this.groups).length;
