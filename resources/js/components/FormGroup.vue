@@ -104,18 +104,7 @@ export default {
 
     watch: {
         index() {
-            if(!window.tinyMCE) {
-              return;
-            }
-            this.$nextTick(() => {
-                tinyMCE.editors
-                    .filter((editor) => editor.id.startsWith(this.group.key))
-                    .forEach((editor) => {
-                        let settings = editor.settings;
-                        editor.remove();
-                        tinyMCE.init(settings);
-                    })
-            });
+            this.refreshEditors();
         }
     },
 
@@ -141,6 +130,21 @@ export default {
     },
 
     methods: {
+        refreshEditors() {
+            if(!window.tinyMCE) {
+                return;
+            }
+            this.$nextTick(() => {
+                tinyMCE.editors
+                    .filter((editor) => editor.id.startsWith(this.group.key))
+                    .forEach((editor) => {
+                        let settings = editor.settings;
+                        editor.remove();
+                        tinyMCE.init(settings);
+                    })
+            });
+        },
+
         /**
          * Move this group up
          */

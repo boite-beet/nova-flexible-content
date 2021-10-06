@@ -10,11 +10,11 @@
 
             <div
                 v-if="order.length > 0">
-                <draggable v-model="order">
-                  <transition-group>
+                <draggable v-model="order" @end="updateGroups">
                     <form-nova-flexible-content-group
                         v-for="(group, index) in orderedGroups"
                         :dusk="field.attribute + '-' + index"
+                        ref="flexibleGroup"
                         :key="group.key"
                         :field="field"
                         :group="group"
@@ -27,7 +27,6 @@
                         @move-down="moveDown(group.key)"
                         @remove="remove(group.key)"
                     />
-                  </transition-group>
                 </draggable>
             </div>
 
@@ -92,6 +91,17 @@ export default {
     },
 
     methods: {
+      updateGroups(ev) {
+        if (ev.oldIndex === ev.newIndex) {
+          this.$refs['flexibleGroup']
+              .filter((ref) => {
+                return ref.$el === ev.item
+              })
+              .forEach((ref) => {
+                ref.refreshEditors();
+              })
+        }
+      },
         /*
          * Set the initial, internal value for the field.
          */
