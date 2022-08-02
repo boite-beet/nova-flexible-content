@@ -10,7 +10,7 @@
 
             <div
                 v-if="order.length > 0">
-                <draggable v-model="order" @end="updateGroups">
+                <draggable v-model="order" @end="updateGroups" handle=".drag-handle">
                     <form-nova-flexible-content-group
                         v-for="(group, index) in orderedGroups"
                         :dusk="field.attribute + '-' + index"

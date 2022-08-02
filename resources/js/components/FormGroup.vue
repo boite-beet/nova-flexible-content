@@ -21,6 +21,14 @@
                 </button>
                 <div v-if="!readonly">
                     <button
+                        dusk="drag-group"
+                        type="button"
+                        class="group-control btn border-t border-r border-40 w-8 h-8 block drag-handle"
+                        :title="__('Move')"
+                        @click.prevent="">
+                      <icon type="drag" view-box="0 0 40 40" width="16" height="16" />
+                    </button>
+                    <button
                         dusk="move-up-group"
                         type="button"
                         class="group-control btn border-t border-r border-40 w-8 h-8 block"
